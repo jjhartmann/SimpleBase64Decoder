@@ -50,7 +50,7 @@ int main(int argn, char *argv[]) {
         base64decode += static_cast<char> (((lookup[base64encode[i+2]] & 0b00000011) << 6) |
                                         ((lookup[base64encode[i+3]] & 0b00111111)));
 
-        DEBUG("TSTING Base Deciding: "  + base64decode)
+        DEBUG("TESTING Base 64 Decoding: "  + base64decode)
     }
 
     PRINT("The Endcoded String: " + base64encode)
