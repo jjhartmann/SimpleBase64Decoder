@@ -12,7 +12,6 @@
 typedef unsigned char byte;
 using namespace std;
 
-
 static map<byte, byte> lookup = {
         {65,  0},        {66,  1},        {67,  2},        {68,  3},        {69,  4},        {70,  5},        {71,  6},
         {72,  7},        {73,  8},        {74,  9},        {75,  10},       {76,  11},       {77,  12},       {78,  13},
@@ -27,21 +26,21 @@ static map<byte, byte> lookup = {
 };
 
 int main(int argn, char *argv[]) {
-
-
+    // Check to make sure the cmd is in proper format
     if (argn < 2)
     {
-        cout << "NEED TO PROVIDE INPUT FILE (ie XXX.in)" << endl;
+        cout << "NEED TO PROVIDE INPUT FILE (ie ./converttobase64 XXX.in)" << endl;
         return 1;
     }
 
+    // Get data from input file.
     string file = argv[1];
     ifstream infile(file.c_str());
     string base64encode, base64decode;
     getline(infile, base64encode);
     infile.close();
 
-
+    // decode the data.
     for (int i = 0; i < base64encode.length(); i+=4)
     {
         base64decode += static_cast<char> (((lookup[base64encode[i]] & 0b00111111) << 2) |
@@ -57,18 +56,10 @@ int main(int argn, char *argv[]) {
     PRINT("The Endcoded String: " + base64encode)
     PRINT("The Decoded String: " + base64decode)
 
+    // Output the data to text file.
     ofstream outfile(file.substr(0, file.length()-3) + ".out");
     outfile << base64decode;
     outfile.close();
-
-
-
-
-
-
-
-
-
 
     return 0;
 }
